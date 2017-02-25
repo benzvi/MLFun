@@ -120,3 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+STACK_OVERFLOW_SRC_POSTS_FILE_PATH = "/Users/enchilada/Downloads/Stack Overflow/Posts.xml"
+STACK_OVERFLOW_DEST_POSTS_FILE_PATH = "../data/stack_overflow_questions.tsv"
+STACK_OVERFLOW_DEST_POSTS_META_FILE_PATH = "../data/stack_overflow_questions_meta.json"
+
+
+STACK_OVERFLOW_SRC_TAGS_FILE_PATH = "/Users/enchilada/Downloads/Stack Overflow/Tags.xml"
+STACK_OVERFLOW_DEST_TAGS_FILE_PATH = "../data/stack_overflow_tags.json"
+
+

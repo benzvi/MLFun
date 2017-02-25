@@ -1,0 +1,11 @@
+4	<p>I want to use a track-bar to change a form's opacity.</p>
+<p>This is my code:</p>
+
+
+
+<p>When I try to build it, I get this error:</p>
+<blockquote>
+<p>Cannot implicitly convert type 'decimal' to 'double'.</p>
+</blockquote>
+<p>I tried making <code>trans</code> a <code>double</code>, but then the control doesn't work. This code has worked fine for me in VB.NET in the past. </p>
+
