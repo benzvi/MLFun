@@ -15,7 +15,7 @@ with open(settings.STACK_OVERFLOW_DEST_TAGS_FILE_PATH) as json_file:
 
 
 def parse_posts_xml(path):
-    meta_data = {}
+
     for event, element in etree.iterparse(path, tag="row"):
 
         post_type = int(element.get("PostTypeId"))
@@ -24,32 +24,30 @@ def parse_posts_xml(path):
             creation_date = datetime.strptime(element.get("CreationDate"), "%Y-%m-%dT%H:%M:%S.%f")
             if creation_date.year >= OLDEST_RELEVANT_YEAR:
                 id = element.get('Id')
+                flat_body = element.get("Body").replace("\n", "")
+                result = [id, flat_body]
 
                 question_body = BeautifulSoup(element.get("Body"), 'html.parser')
-                meta_data[id] = _calculate_features_from_question_body(question_body)
-                meta_data[id].update({
-                    "Score": int(element.get('Score')),
-                    "TitleWordsCount": len(element.get("Title").split(" ")),
-                    "TotalTagsCount": _calculate_total_tags_count(element.get("Tags")),
-                    "AnswerCount": int(element.get("AnswerCount")),
-                    "CommentCount": int(element.get("CommentCount")),
-                    "FavoriteCount": int(element.get("FavoriteCount"))
-                })
+                result += _calculate_features_from_question_body(question_body)
 
-                yield [element.get("Id"), question_body]
+                result += [
+                    int(element.get('Score')),
+                    len(element.get("Title").split(" ")),
+                    _calculate_total_tags_count(element.get("Tags")),
+                    int(element.get("AnswerCount")),
+                    int(element.get("CommentCount")),
+                    int(element.get("FavoriteCount"))
+                ]
+
+                yield result
 
         element.clear()
-
-    yield meta_data
 
 
 def parse_tags_xml(path):
-    result = {}
     for event, element in etree.iterparse(path, tag="row"):
-        result[element.get("TagName")] = int(element.get("Count"))
+        yield element.get("TagName"), int(element.get("Count"))
         element.clear()
-
-    return result
 
 
 def _calculate_features_from_question_body(body):
@@ -57,8 +55,6 @@ def _calculate_features_from_question_body(body):
 
     for code in body.find_all("pre"):
         code_lines_count += len([line for line in code.text.split("\n") if line])
-        pass
-
     while body.pre:
         body.pre.extract()
 
@@ -69,15 +65,14 @@ def _calculate_features_from_question_body(body):
     exclams_count = body.text.count('!')
     images_count = len(body.find_all("img"))
 
-    return {
-        'WordsCount': words_count,
-        'CodeLinesCount': code_lines_count,
-        'AvgSentenceLength': avg_sentence_length,
-        'AvgWordLength': avg_word_length,
-        'CapsCount': caps_count,
-        'ExclamsCount': exclams_count,
-        'ImagesCount': images_count,
-    }
+    return [
+        words_count,
+        code_lines_count,
+        round(avg_sentence_length, 1),
+        round(avg_word_length, 1),
+        caps_count, exclams_count,
+        images_count
+    ]
 
 
 def _calculate_total_tags_count(tags):
