@@ -35,5 +35,5 @@ class DataExtractorTests(TestCase):
 
         for line in open(TEST_STACK_OVERFLOW_DEST_POSTS_FILE_PATH, "r"):
             id, text = line.split("\t")
-
             self.assertEqual(id, "4")
+            break

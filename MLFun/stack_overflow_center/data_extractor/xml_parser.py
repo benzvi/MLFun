@@ -10,13 +10,17 @@ from django.conf import settings
 QUESTION_TYPE = 1
 OLDEST_RELEVANT_YEAR = 2015
 
-with open(settings.STACK_OVERFLOW_DEST_TAGS_FILE_PATH) as json_file:
-    tags_data = json.load(json_file)
-
-
 def parse_posts_xml(path):
 
+    with open(settings.STACK_OVERFLOW_DEST_TAGS_FILE_PATH) as json_file:
+        tags_data = json.load(json_file)
+
+    i = 0
     for event, element in etree.iterparse(path, tag="row"):
+        i += 1
+        if i >= 100000 and i % 100000 == 0:
+            print "Went over %s posts" % i
+
 
         post_type = int(element.get("PostTypeId"))
 
@@ -24,19 +28,19 @@ def parse_posts_xml(path):
             creation_date = datetime.strptime(element.get("CreationDate"), "%Y-%m-%dT%H:%M:%S.%f")
             if creation_date.year >= OLDEST_RELEVANT_YEAR:
                 id = element.get('Id')
-                flat_body = element.get("Body").replace("\n", "")
+                flat_body = element.get("Body").encode('utf-8').replace("\n", "")
                 result = [id, flat_body]
 
                 question_body = BeautifulSoup(element.get("Body"), 'html.parser')
                 result += _calculate_features_from_question_body(question_body)
 
                 result += [
-                    int(element.get('Score')),
+                    int(element.get('Score') or 0),
                     len(element.get("Title").split(" ")),
-                    _calculate_total_tags_count(element.get("Tags")),
-                    int(element.get("AnswerCount")),
-                    int(element.get("CommentCount")),
-                    int(element.get("FavoriteCount"))
+                    _calculate_total_tags_count(element.get("Tags"), tags_data),
+                    int(element.get("AnswerCount") or 0),
+                    int(element.get("CommentCount") or 0),
+                    int(element.get("FavoriteCount") or 0)
                 ]
 
                 yield result
@@ -75,7 +79,7 @@ def _calculate_features_from_question_body(body):
     ]
 
 
-def _calculate_total_tags_count(tags):
+def _calculate_total_tags_count(tags, tags_data):
     count = 0
 
     tags = tags[1:len(tags) - 1]

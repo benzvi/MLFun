@@ -7,4 +7,4 @@ def convert(from_path, to_path, parse_function):
         for tag_name, tag_count in parse_function(from_path):
             result[tag_name] = tag_count
 
-        json.dump(parse_function(from_path), json_file)
+        json.dump(result, json_file)
