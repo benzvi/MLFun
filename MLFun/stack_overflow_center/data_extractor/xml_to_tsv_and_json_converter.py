@@ -1,31 +1,25 @@
 import json
 
+from stack_overflow_center.data_extractor.config import PIPES
+from stack_overflow_center.data_extractor.xml_parser import parse_posts_xml
+from stack_overflow_center.data_extractor.analyzed_post import AnalyzedPost
+from stack_overflow_center.data_extractor.writers.posts_writers_provider import PostsWritersProvider
 
-def convert(from_path, to_path, to_json_path, parse_function):
-    json_data = {}
-    with open(to_path, "w") as f:
-        for values in parse_function(from_path):
-            id = values[0]
-            text = values[1]
 
-            line = "\t".join(map(str, [id, text]))
-            f.write(line + "\n")
+def convert(from_path):
+    writers = PostsWritersProvider().get_writers()
+    for raw_post in parse_posts_xml(from_path):
+        analyzed_post = AnalyzedPost(raw_post.id,
+                                     raw_post.score,
+                                     raw_post.answer_count,
+                                     raw_post.comment_count,
+                                     raw_post.favorite_count)
 
-            json_data[id] = {
-                'WordsCount': values[2],
-                'CodeLinesCount': values[3],
-                'AvgSentenceLength': values[4],
-                'AvgWordLength': values[5],
-                'CapsCount': values[6],
-                'ExclamsCount': values[7],
-                'ImagesCount': values[8],
-                "Score": values[9],
-                "TitleWordsCount": values[10],
-                "TotalTagsCount": values[11],
-                "AnswerCount": values[12],
-                "CommentCount": values[13],
-                "FavoriteCount": values[14]
-            }
+        for pipe in PIPES:
+            pipe.transform(raw_post, analyzed_post)
 
-    with open(to_json_path, "w") as json_file:
-        json.dump(json_data, json_file)
+        for writer in writers:
+            writer.write(analyzed_post)
+
+    for writer in writers:
+        writer.done()
