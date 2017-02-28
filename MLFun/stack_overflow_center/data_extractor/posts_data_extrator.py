@@ -6,7 +6,7 @@ from stack_overflow_center.data_extractor.analyzed_post import AnalyzedPost
 from stack_overflow_center.data_extractor.writers.posts_writers_provider import PostsWritersProvider
 
 
-def convert(from_path):
+def extract(from_path):
     writers = PostsWritersProvider().get_writers()
     for raw_post in parse_posts_xml(from_path):
         analyzed_post = AnalyzedPost(raw_post.id,

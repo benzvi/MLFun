@@ -1,6 +1,6 @@
 
 
-class StackOverflowPost(object):
+class RawPost(object):
     def __init__(self, id, body, score, title, tags, answer_count, comment_count, favorite_count):
         self.id = id
         self.body = body

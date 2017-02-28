@@ -17,9 +17,11 @@ class QuestionBodyPipe(BasePipe):
         while body.pre:
             body.pre.extract()
 
-        analyzed_post.words_count = len(nltk.word_tokenize(body.text))
+        body_words = nltk.word_tokenize(body.text)
+        
+        analyzed_post.words_count = len(body_words)
         analyzed_post.average_sentence_length = round(np.average([len(nltk.word_tokenize(sent)) for sent in nltk.sent_tokenize(body.text)]), 1)
-        analyzed_post.average_word_length = round(np.average([len(w) for w in nltk.word_tokenize(body.text)]), 1)
-        analyzed_post.caps_count = np.sum([word.isupper() for word in nltk.word_tokenize(body.text)])
+        analyzed_post.average_word_length = round(np.average([len(w) for w in body_words]), 1)
+        analyzed_post.caps_count = np.sum([word.isupper() for word in body_words])
         analyzed_post.exclams_count = body.text.count('!')
         analyzed_post.images_count = len(body.find_all("img"))
