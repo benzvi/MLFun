@@ -1,14 +1,14 @@
 
 from django.conf import settings
 
-from stack_overflow_center.data_extractor.pipes.base_pipe import BasePipe
+from stack_overflow_center.data_extractor.populators.base_populator import BasePopulator
 from stack_overflow_center.data_extractor.tags_data_repository import get_tags_data
 
 
-class TagsPipe(BasePipe):
+class TagsPopulator(BasePopulator):
 
     @staticmethod
-    def transform(parsed_post, analyzed_post):
+    def populate(parsed_post, analyzed_post):
         tags_data = get_tags_data(settings.STACK_OVERFLOW_DEST_TAGS_FILE_PATH)
 
         tags = parsed_post.tags

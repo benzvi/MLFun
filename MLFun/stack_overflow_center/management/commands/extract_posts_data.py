@@ -3,7 +3,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
-from stack_overflow_center.data_extractor.posts_data_extrator import extract
+from stack_overflow_center.data_extractor.posts_data_extractor import extract
 
 
 class Command(BaseCommand):

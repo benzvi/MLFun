@@ -1,5 +1,6 @@
-from stack_overflow_center.data_extractor.pipes.tags_pipe import TagsPipe
-from stack_overflow_center.data_extractor.pipes.title_pipe import TitlePipe
-from stack_overflow_center.data_extractor.pipes.question_body_pipe import QuestionBodyPipe
+from stack_overflow_center.data_extractor.populators.tags_populator import TagsPopulator
+from stack_overflow_center.data_extractor.populators.title_populator import TitlePopulator
+from stack_overflow_center.data_extractor.populators.default_populator import DefaultPopulator
+from stack_overflow_center.data_extractor.populators.question_body_populator import QuestionBodyPopulator
 
-PIPES = [TagsPipe, QuestionBodyPipe, TitlePipe]
+POPULATORS = [TagsPopulator, QuestionBodyPopulator, TitlePopulator, DefaultPopulator]

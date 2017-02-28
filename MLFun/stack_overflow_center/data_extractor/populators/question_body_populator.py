@@ -2,13 +2,13 @@ import nltk
 import numpy as np
 from bs4 import BeautifulSoup
 
-from stack_overflow_center.data_extractor.pipes.base_pipe import BasePipe
+from stack_overflow_center.data_extractor.populators.base_populator import BasePopulator
 
 
-class QuestionBodyPipe(BasePipe):
+class QuestionBodyPopulator(BasePopulator):
 
     @staticmethod
-    def transform(parsed_post, analyzed_post):
+    def populate(parsed_post, analyzed_post):
         body = BeautifulSoup(parsed_post.body, 'html.parser')
         analyzed_post.flat_body = parsed_post.body.encode('utf-8').replace("\n", "")
 

@@ -7,8 +7,8 @@ def extract(from_path):
 
     writer = TagsJSONWriter(settings.STACK_OVERFLOW_DEST_TAGS_FILE_PATH)
 
-    for tag_name, tag_count in parse_tags_xml(from_path):
-        writer.write([tag_name, tag_count])
+    for data in parse_tags_xml(from_path):
+        writer.write(data)
 
 
     writer.done()

@@ -1,11 +1,11 @@
 
 class AnalyzedPost(object):
-    def __init__(self, id, score, answer_count, comment_count, favorite_count):
-        self.id = id
-        self.score = score
-        self.answer_count = answer_count
-        self.comment_count = comment_count
-        self.favorite_count = favorite_count
+    def __init__(self):
+        self.id = ""
+        self.score = 0
+        self.answer_count = 0
+        self.comment_count = 0
+        self.favorite_count = 0
         self.flat_body = ""
         self.words_count = 0
         self.code_lines_count = 0

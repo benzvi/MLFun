@@ -3,7 +3,7 @@ import json
 from django.test import TestCase
 from django.conf import settings
 
-from stack_overflow_center.data_extractor.posts_data_extrator import extract
+from stack_overflow_center.data_extractor.posts_data_extractor import extract
 
 TEST_STACK_OVERFLOW_SRC_POSTS_FILE_PATH = "../tests/data/posts_test_data.xml"
 TEST_STACK_OVERFLOW_DEST_POSTS_FILE_PATH = "../tests/data/test_questions.tsv"
