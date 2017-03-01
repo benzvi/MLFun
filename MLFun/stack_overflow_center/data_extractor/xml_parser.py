@@ -1,8 +1,8 @@
-import json
-from lxml import etree
 from datetime import datetime
 
-from stack_overflow_center.data_extractor.raw_post import RawPost
+from lxml import etree
+
+from stack_overflow_center.data_extractor.post_objects.raw_post import RawPost
 
 QUESTION_TYPE = 1
 OLDEST_RELEVANT_YEAR = 2015
