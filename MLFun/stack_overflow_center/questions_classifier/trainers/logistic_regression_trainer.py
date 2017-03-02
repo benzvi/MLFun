@@ -20,5 +20,5 @@ def train(features, labels):
         if score > best_score:
             best_score = score
             result = classifier
-Fi
+
     return result
