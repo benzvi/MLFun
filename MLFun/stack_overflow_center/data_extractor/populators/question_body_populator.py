@@ -17,7 +17,7 @@ class QuestionBodyPopulator(BasePopulator):
         while body.pre:
             body.pre.extract()
 
-        body_words = nltk.word_tokenize(body.text)
+        body_words = nltk.word_tokenize(body.text) or [""]
         
         analyzed_post.words_count = len(body_words)
         analyzed_post.average_sentence_length = round(np.average([len(nltk.word_tokenize(sent)) for sent in nltk.sent_tokenize(body.text)]), 1)

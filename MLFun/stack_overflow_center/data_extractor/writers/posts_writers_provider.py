@@ -1,5 +1,3 @@
-# from django.conf import settings
-
 from stack_overflow_center.data_extractor.writers.posts_tsv_writer import PostsTSVWriter
 from stack_overflow_center.data_extractor.writers.posts_json_writer import PostsJSONWriter
 

@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 STACK_OVERFLOW_SRC_POSTS_FILE_PATH = "/Users/enchilada/Downloads/Stack Overflow/Posts.xml"
 STACK_OVERFLOW_DEST_POSTS_FILE_PATH = "../data/stack_overflow_questionsm.tsv"
-STACK_OVERFLOW_DEST_POSTS_META_FILE_PATH = "../data/stack_overflow_questions_metam.json"
+STACK_OVERFLOW_DEST_POSTS_META_FILE_PATH = "../data/stack_overflow_questions_meta.json"
 
 
 STACK_OVERFLOW_SRC_TAGS_FILE_PATH = "/Users/enchilada/Downloads/Stack Overflow/Tags.xml"
