@@ -8,9 +8,9 @@ from stack_overflow_center.data_extractor.populators.base_populator import BaseP
 class QuestionBodyPopulator(BasePopulator):
 
     @staticmethod
-    def populate(parsed_post, analyzed_post):
-        body = BeautifulSoup(parsed_post.body, 'html.parser')
-        analyzed_post.flat_body = parsed_post.body.encode('utf-8').replace("\n", "")
+    def populate(raw_post, analyzed_post):
+        body = BeautifulSoup(raw_post.body, 'html.parser')
+        analyzed_post.flat_body = raw_post.body.encode('utf-8').replace("\n", "")
 
         for code in body.find_all("pre"):
             analyzed_post.code_lines_count += len([line for line in code.text.split("\n") if line])

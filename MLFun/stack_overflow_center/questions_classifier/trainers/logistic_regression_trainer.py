@@ -1,4 +1,3 @@
-
 from sklearn.cross_validation import KFold
 from sklearn.linear_model import LogisticRegression
 
@@ -17,6 +16,7 @@ def train(features, labels):
         classifier.fit(features_train, labels_train)
 
         score = classifier.score(features_test, labels_test)
+
         if score > best_score:
             best_score = score
             result = classifier

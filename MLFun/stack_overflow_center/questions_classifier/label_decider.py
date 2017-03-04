@@ -12,4 +12,4 @@ def calculate_questions_labels(questions):
 
 
 def _is_question_good(question):
-    return question[SCORE] > 2 or question[ANSWER_COUNT] > 5 or question[FAVORITE_COUNT] > 2
+    return question[SCORE] > 2 or question[ANSWER_COUNT] > 2 or question[FAVORITE_COUNT] > 1

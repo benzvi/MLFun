@@ -1,0 +1,13 @@
+from enum import Enum
+
+
+class Feature(Enum):
+    WORDS_COUNT = 0
+    CODE_LINES_COUNT = 1
+    AVERAGE_SENTENCE_LENGTH = 2
+    AVERAGE_WORD_LENGTH = 3
+    CAPS_COUNT = 4
+    EXCLAMS_COUNT = 5
+    IMAGES_COUNT = 6
+    TITLE_WORDS_COUNT = 8
+    TOTAL_TAGS_COUNT = 9
