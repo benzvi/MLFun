@@ -1,17 +1,17 @@
 import numpy
 
-from stack_overflow_center.questions_classifier.feature import Feature
+from stack_overflow_center.common import features_indices
 
 INCLUDED_FEATURES = [
-    Feature.WORDS_COUNT.value,
-    Feature.CODE_LINES_COUNT.value,
-    Feature.AVERAGE_SENTENCE_LENGTH.value,
-    Feature.AVERAGE_WORD_LENGTH.value,
-    Feature.CAPS_COUNT.value,
-    Feature.EXCLAMS_COUNT.value,
-    Feature.IMAGES_COUNT.value,
-    Feature.TITLE_WORDS_COUNT.value,
-    Feature.TOTAL_TAGS_COUNT.value
+    features_indices.WORDS_COUNT,
+    features_indices.CODE_LINES_COUNT,
+    features_indices.AVERAGE_SENTENCE_LENGTH,
+    features_indices.AVERAGE_WORD_LENGTH,
+    features_indices.CAPS_COUNT,
+    features_indices.EXCLAMS_COUNT,
+    features_indices.IMAGES_COUNT,
+    features_indices.TITLE_WORDS_COUNT,
+    features_indices.TOTAL_TAGS_COUNT
 ]
 
 
