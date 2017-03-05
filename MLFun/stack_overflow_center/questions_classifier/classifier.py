@@ -7,13 +7,9 @@ from stack_overflow_center.questions_classifier.trainers.logistic_regression_tra
 from stack_overflow_center.questions_classifier.feature_extractor import extract_questions_features
 
 
-
 def classify():
     data = extract_data(settings)
     questions_features = extract_questions_features(data)
-    questions_lables = calculate_questions_labels(data)
-    classifier = train(questions_features, questions_lables)
+    questions_labels = calculate_questions_labels(data)
+    classifier = train(questions_features, questions_labels)
     save(classifier)
-
-
-classify()

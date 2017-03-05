@@ -17,6 +17,8 @@ def train(features, labels):
 
         score = classifier.score(features_test, labels_test)
 
+        print "Score: %s" % score
+
         if score > best_score:
             best_score = score
             result = classifier
